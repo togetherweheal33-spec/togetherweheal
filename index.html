@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Together We Heal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --sage: #7a9e87; --sage-light: #e8f0eb; --sage-dark: #4a6b55;
+    --blush: #e8c4b8; --blush-light: #fdf3ef; --blush-dark: #c4866e;
+    --warm: #f5efe8; --text-dark: #2c2c28; --text-mid: #5a5a52;
+    --text-muted: #8a8a7e; --cream: #faf7f2; --white: #ffffff;
+    --border: rgba(122,158,135,0.18);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,247,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2.5rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.02em; color: var(--sage-dark); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--sage-dark); }
+  .nav-cta { background: var(--sage-dark); color: white !important; padding: 0.45rem 1.2rem; border-radius: 50px; }
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 2.5rem 60px; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 80% 40%, #e8f0eb 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 20% 70%, #fdf3ef 0%, transparent 55%), var(--cream); z-index: 0; }
+  .hero-circle { position: absolute; border-radius: 50%; opacity: 0.12; }
+  .hero-circle-1 { width: 600px; height: 600px; border: 1px solid var(--sage); top: -100px; right: -150px; animation: slowspin 30s linear infinite; }
+  .hero-circle-2 { width: 350px; height: 350px; border: 1px solid var(--blush-dark); bottom: 0px; left: -80px; animation: slowspin 20s linear infinite reverse; }
+  @keyframes slowspin { to { transform: rotate(360deg); } }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; text-align: center; }
+  .hero-label { display: inline-block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage-dark); background: var(--sage-light); padding: 0.35rem 1rem; border-radius: 50px; margin-bottom: 2rem; animation: fadeup 0.8s ease both; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 4.8rem); font-weight: 300; line-height: 1.1; color: var(--text-dark); margin-bottom: 1.5rem; animation: fadeup 0.8s 0.1s ease both; }
+  .hero h1 em { font-style: italic; color: var(--sage-dark); }
+  .hero-sub { font-size: 1.05rem; font-weight: 300; color: var(--text-mid); line-height: 1.75; max-width: 520px; margin: 0 auto 2.5rem; animation: fadeup 0.8s 0.2s ease both; }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeup 0.8s 0.3s ease both; }
+  .btn-primary { background: var(--sage-dark); color: white; padding: 0.85rem 2rem; border-radius: 50px; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em; text-decoration: none; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--text-mid); padding: 0.85rem 2rem; border-radius: 50px; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; cursor: pointer; }
+  .btn-ghost:hover { border-color: var(--sage); color: var(--sage-dark); }
+  @keyframes fadeup { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .strip { background: var(--sage-dark); color: white; padding: 0.85rem 0; overflow: hidden; white-space: nowrap; }
+  .strip-inner { display: inline-flex; animation: marquee 22s linear infinite; }
+  .strip-item { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; padding: 0 2.5rem; opacity: 0.9; }
+  .strip-dot { opacity: 0.4; padding: 0 0.5rem; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  section { padding: 6rem 2.5rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; color: var(--text-dark); margin-bottom: 1.2rem; }
+  .section-title em { font-style: italic; color: var(--sage-dark); }
+  .section-body { font-size: 1rem; font-weight: 300; color: var(--text-mid); line-height: 1.8; max-width: 560px; }
+  .centered { text-align: center; }
+  .centered .section-body { margin: 0 auto; }
+  .about-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-visual { position: relative; height: 420px; }
+  .about-card { position: absolute; background: white; border-radius: 20px; padding: 2rem; border: 1px solid var(--border); }
+  .about-card-main { width: 75%; top: 0; left: 0; background: var(--sage-light); }
+  .about-card-float { width: 55%; bottom: 40px; right: 0; background: var(--blush-light); }
+  .about-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; font-style: italic; line-height: 1.4; color: var(--sage-dark); margin-bottom: 1rem; }
+  .about-attr { font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+  .stat-row { display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
+  .stat { background: var(--warm); border-radius: 12px; padding: 1.1rem 1.4rem; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--sage-dark); line-height: 1; }
+  .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; letter-spacing: 0.04em; }
+  .pillars { background: var(--warm); }
+  .pillars-grid { max-width: 1100px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .pillar-card { background: white; border-radius: 20px; padding: 2.2rem 2rem; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+  .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(74,107,85,0.1); }
+  .pillar-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.25rem; }
+  .pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--text-dark); margin-bottom: 0.6rem; }
+  .pillar-desc { font-size: 0.88rem; font-weight: 300; color: var(--text-mid); line-height: 1.7; }
+  .quote-section { background: var(--sage-dark); color: white; text-align: center; padding: 6rem 2.5rem; }
+  .big-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 300; font-style: italic; line-height: 1.4; max-width: 780px; margin: 0 auto 1.5rem; opacity: 0.95; }
+  .quote-source { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.55; }
+  .services-grid { max-width: 1100px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .service-card { border-radius: 20px; padding: 2.5rem; position: relative; overflow: hidden; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .sc-sage { background: var(--sage-light); } .sc-blush { background: var(--blush-light); } .sc-warm { background: var(--warm); border: 1px solid var(--border); }
+  .service-num { position: absolute; top: 2rem; right: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(0,0,0,0.06); line-height: 1; }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; color: var(--text-dark); margin-bottom: 0.6rem; }
+  .service-desc { font-size: 0.87rem; font-weight: 300; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.2rem; }
+  .service-link { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sage-dark); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+  .service-link::after { content: '→'; transition: transform 0.2s; }
+  .service-link:hover::after { transform: translateX(4px); }
+  .testimonials { background: var(--warm); }
+  .testimonials-grid { max-width: 1100px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .testimonial-card { background: white; border-radius: 20px; padding: 2rem; border: 1px solid var(--border); }
+  .t-stars { color: var(--blush-dark); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem; }
+  .t-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; font-style: italic; color: var(--text-dark); line-height: 1.6; margin-bottom: 1.25rem; }
+  .t-author { display: flex; align-items: center; gap: 10px; }
+  .t-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 500; color: white; }
+  .ta-sage { background: var(--sage); } .ta-blush { background: var(--blush-dark); } .ta-dark { background: var(--sage-dark); }
+  .t-name { font-size: 0.85rem; font-weight: 500; color: var(--text-dark); }
+  .t-role { font-size: 0.75rem; color: var(--text-muted); }
+  .cta-section { text-align: center; padding: 8rem 2.5rem; background: var(--cream); position: relative; overflow: hidden; }
+  .cta-blob { position: absolute; border-radius: 50%; opacity: 0.15; }
+  .cta-blob-1 { width: 500px; height: 500px; background: var(--sage-light); top: -100px; left: -100px; }
+  .cta-blob-2 { width: 400px; height: 400px; background: var(--blush-light); bottom: -80px; right: -80px; }
+  .cta-content { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+  .cta-tagline { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
+  footer { background: var(--text-dark); color: rgba(255,255,255,0.6); padding: 4rem 2.5rem 2.5rem; }
+  .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: white; margin-bottom: 0.75rem; }
+  .footer-tagline { font-size: 0.85rem; font-weight: 300; line-height: 1.7; max-width: 240px; }
+  .footer-col h4 { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: white; margin-bottom: 1.25rem; font-weight: 500; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.6rem; }
+  .footer-col a { font-size: 0.85rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: white; }
+  .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
+  @media (max-width: 768px) { nav { padding: 0 1.25rem; } .nav-links { display: none; } section { padding: 4rem 1.25rem; } .about-grid { grid-template-columns: 1fr; gap: 2rem; } .about-visual { height: 260px; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo">Together We Heal</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#connect" class="nav-cta">Begin Here</a></li>
+  </ul>
+</nav>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <div class="hero-content">
+    <div class="hero-label">A safe space for every voice</div>
+    <h1>A place to be<br><em>held exactly</em><br>as you are</h1>
+    <p class="hero-sub">There are moments when we don't need advice. We don't need solutions. We simply need a space that holds us — our emotions, our struggles, our whole selves.</p>
+    <div class="hero-actions">
+      <a href="#connect" class="btn-primary">Find your space</a>
+      <a href="#about" class="btn-ghost">Our story</a>
+    </div>
+  </div>
+</section>
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-item">You are heard</span><span class="strip-dot">·</span>
+    <span class="strip-item">You are seen</span><span class="strip-dot">·</span>
+    <span class="strip-item">You belong here</span><span class="strip-dot">·</span>
+    <span class="strip-item">Rest, breathe, belong</span><span class="strip-dot">·</span>
+    <span class="strip-item">Together we heal</span><span class="strip-dot">·</span>
+    <span class="strip-item">You are heard</span><span class="strip-dot">·</span>
+    <span class="strip-item">You are seen</span><span class="strip-dot">·</span>
+    <span class="strip-item">You belong here</span><span class="strip-dot">·</span>
+    <span class="strip-item">Rest, breathe, belong</span><span class="strip-dot">·</span>
+    <span class="strip-item">Together we heal</span><span class="strip-dot">·</span>
+  </div>
+</div>
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-card about-card-main">
+        <p class="about-quote">"We simply need a space that can hold us exactly as we are."</p>
+        <p class="about-attr">Together We Heal · Our founding belief</p>
+      </div>
+      <div class="about-card about-card-float">
+        <div class="stat-row" style="margin-top:0;">
+          <div class="stat"><div class="stat-num">1200+</div><div class="stat-label">lives touched</div></div>
+          <div class="stat"><div class="stat-num">Safe</div><div class="stat-label">always</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Who we are</div>
+      <h2 class="section-title">Healing starts<br>with being <em>heard</em></h2>
+      <p class="section-body">Together We Heal is a wellness space rooted in one belief — that every person deserves to be heard without condition. No justifications. No minimising. No rushing toward solutions before you're ready.</p>
+      <p class="section-body" style="margin-top:1rem;">We are a community, a resource, and a refuge — built by people who know what it feels like to need a space and not find one.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">compassion</div></div>
+        <div class="stat"><div class="stat-num">0</div><div class="stat-label">judgment</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">you</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="pillars" id="pillars">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="centered">
+      <div class="section-label">What we stand for</div>
+      <h2 class="section-title">The pillars of <em>our space</em></h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card"><div class="pillar-icon" style="background:#e8f0eb;">🌿</div><h3 class="pillar-title">Unconditional belonging</h3><p class="pillar-desc">You don't need to earn your place here. You don't need to be healed, fixed, or in crisis. You belong simply by being.</p></div>
+      <div class="pillar-card"><div class="pillar-icon" style="background:#fdf3ef;">🕊</div><h3 class="pillar-title">Emotions without explanation</h3><p class="pillar-desc">Your feelings don't need a reason before they deserve space. They're valid simply because you're feeling them.</p></div>
+      <div class="pillar-card"><div class="pillar-icon" style="background:#f5efe8;">🌸</div><h3 class="pillar-title">Rest before solutions</h3><p class="pillar-desc">Not every hard thing needs a lesson. Sometimes things just hurt — and you're allowed to simply sit in that.</p></div>
+      <div class="pillar-card"><div class="pillar-icon" style="background:#e8f0eb;">🤝</div><h3 class="pillar-title">Community over isolation</h3><p class="pillar-desc">Healing is rarely a solo journey. We believe in the quiet power of being witnessed by others who understand.</p></div>
+    </div>
+  </div>
+</section>
+<section class="quote-section">
+  <p class="big-quote">"A space where our emotions don't have to be hidden. A space where our struggles don't have to be justified. A space where we can rest, breathe, and belong."</p>
+  <p class="quote-source">Together We Heal · togetherweheal.in</p>
+</section>
+<section id="services">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="centered">
+      <div class="section-label">How we show up</div>
+      <h2 class="section-title">Ways to <em>heal together</em></h2>
+      <p class="section-body">Every path to wellness looks different. We meet you exactly where you are.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card sc-sage"><span class="service-num">01</span><h3 class="service-name">Safe Conversations</h3><p class="service-desc">One-on-one guided sessions where your story is the only agenda. No advice unless you ask. Just presence.</p><a href="#" class="service-link">Explore</a></div>
+      <div class="service-card sc-blush"><span class="service-num">02</span><h3 class="service-name">Community Circles</h3><p class="service-desc">Small, curated groups brought together by shared experiences. Held safely, facilitated with care.</p><a href="#" class="service-link">Join a circle</a></div>
+      <div class="service-card sc-warm"><span class="service-num">03</span><h3 class="service-name">Wellness Resources</h3><p class="service-desc">Thoughtfully curated tools — articles, guided reflections, and practices — for when you need something to hold onto.</p><a href="#" class="service-link">Browse resources</a></div>
+    </div>
+  </div>
+</section>
+<section class="testimonials" id="stories">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="centered">
+      <div class="section-label">Voices from our community</div>
+      <h2 class="section-title">Real people, <em>real healing</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"For the first time I didn't feel like I had to justify why I was struggling. I just felt... held."</p><div class="t-author"><div class="t-avatar ta-sage">AM</div><div><div class="t-name">Ananya M.</div><div class="t-role">Community member</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Someone finally asked how I was — and actually waited for the real answer. That changed everything."</p><div class="t-author"><div class="t-avatar ta-blush">RK</div><div><div class="t-name">Rahul K.</div><div class="t-role">Community member</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"I learned that my pain doesn't need a silver lining. I'm allowed to just feel it. That was so freeing."</p><div class="t-author"><div class="t-avatar ta-dark">PS</div><div><div class="t-name">Priya S.</div><div class="t-role">Community member</div></div></div></div>
+    </div>
+  </div>
+</section>
+<section class="cta-section" id="connect">
+  <div class="cta-blob cta-blob-1"></div>
+  <div class="cta-blob cta-blob-2"></div>
+  <div class="cta-content">
+    <div class="cta-tagline">Begin your journey</div>
+    <h2 class="section-title" style="margin-bottom:1rem;">You don't have to<br>carry this <em>alone</em></h2>
+    <p class="section-body" style="margin: 0 auto 2.5rem;">Whether you're in the middle of something heavy or simply seeking a place to breathe — we're here. No appointment needed. No perfect words required.</p>
+    <div class="hero-actions" style="justify-content:center;">
+      <a href="https://togetherweheal.in" class="btn-primary">Visit togetherweheal.in</a>
+      <a href="#" class="btn-ghost">Follow on Instagram</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Together We Heal</div>
+      <p class="footer-tagline">A space where emotions don't have to be hidden, struggles don't need to be justified, and everyone belongs.</p>
+    </div>
+    <div class="footer-col"><h4>Explore</h4><ul><li><a href="#">About us</a></li><li><a href="#">Our approach</a></li><li><a href="#">Community</a></li><li><a href="#">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Safe conversations</a></li><li><a href="#">Community circles</a></li><li><a href="#">Wellness resources</a></li><li><a href="#">Events</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Contact us</a></li><li><a href="#">Newsletter</a></li><li><a href="#">togetherweheal.in</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Together We Heal · togetherweheal.in</span>
+    <span>Made with care 🤍</span>
+  </div>
+</footer>
+</body>
+</html>
